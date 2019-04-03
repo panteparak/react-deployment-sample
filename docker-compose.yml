@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  nginx:
+#    image: panteparak/iot-demo-ui
+    build: ./webapp
+    restart: unless-stopped
+    ports:
+      - 8088:80
+    depends_on:
+      - backend
+    environment:
+      - API_ENDPOINT=http://backend:3000
+
+  backend:
+    image: panteparak/iot-demo-express
+    # build: ./socket_server
+    restart: unless-stopped
+
+    
